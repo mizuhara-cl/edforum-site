@@ -1,0 +1,158 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import resources from '../../data/resources.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+interface ResourcePage {
+  slug: string;
+  title: string;
+  section: string;
+  sectionTitle: string;
+  html: string;
+}
+
+const pages = resources as ResourcePage[];
+
+export async function getStaticPaths() {
+  const data = (await import('../../data/resources.json')).default as ResourcePage[];
+  return data.map(p => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params as { slug: string };
+const page = pages.find(p => p.slug === slug)!;
+const sameSection = pages.filter(p => p.section === page.section);
+const idx = sameSection.findIndex(p => p.slug === page.slug);
+const prev = idx > 0 ? sameSection[idx - 1] : null;
+const next = idx < sameSection.length - 1 ? sameSection[idx + 1] : null;
+---
+<Layout
+  title={`${page.title}｜${page.sectionTitle}`}
+  description={`${page.sectionTitle} — ${page.title}。摂食障害懇話会の予防啓発コラム。`}
+>
+  <section class="section section--hero">
+    <div class="container">
+      <div class="page-heading" style="margin-bottom:32px;">
+        <p class="page-heading__en" style="font-style:normal; letter-spacing:0.18em;">
+          <a href={`${base}/resources/`} style="color:var(--accent); text-decoration:none;">RESOURCES</a>
+          <span style="color:var(--text-muted); margin:0 8px;">›</span>
+          {page.sectionTitle}
+        </p>
+        <h1 class="page-heading__title">{page.title}</h1>
+      </div>
+
+      <article class="article resource-body" set:html={page.html}></article>
+
+      <nav class="resource-nav">
+        {prev ? (
+          <a class="resource-nav__link resource-nav__link--prev" href={`${base}/resources/${prev.slug}/`}>
+            <span class="resource-nav__label">前のページ</span>
+            <span class="resource-nav__title">{prev.title}</span>
+          </a>
+        ) : <span></span>}
+        {next ? (
+          <a class="resource-nav__link resource-nav__link--next" href={`${base}/resources/${next.slug}/`}>
+            <span class="resource-nav__label">次のページ</span>
+            <span class="resource-nav__title">{next.title}</span>
+          </a>
+        ) : <span></span>}
+      </nav>
+
+      <p style="text-align:center; margin-top:36px;">
+        <a href={`${base}/resources/`} class="btn">予防啓発コラム 一覧へ</a>
+      </p>
+    </div>
+  </section>
+
+  <style is:global>
+    .resource-body {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .resource-body > h2:first-of-type {
+      display: none;
+    }
+    .resource-body p {
+      margin: 1.4em 0;
+      line-height: 2.05;
+    }
+    .resource-body img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 28px auto;
+      border: 1px solid var(--border-light);
+      background: var(--neutral);
+      padding: 4px;
+    }
+    .resource-body strong {
+      color: var(--primary);
+    }
+    .resource-body sup {
+      color: var(--accent);
+      font-size: 0.7em;
+      margin: 0 0.1em;
+    }
+    .resource-body a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .resource-body a:hover { color: var(--accent); }
+    .resource-body table {
+      border-collapse: collapse;
+      margin: 24px auto;
+      font-size: 0.92rem;
+    }
+    .resource-body th, .resource-body td {
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+    }
+    .resource-body th {
+      background: var(--neutral);
+      font-weight: 600;
+    }
+
+    .resource-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-light);
+    }
+    .resource-nav__link {
+      display: flex;
+      flex-direction: column;
+      padding: 14px 18px;
+      border: 1px solid var(--border-light);
+      text-decoration: none;
+      transition: all .2s;
+      background: var(--bg);
+    }
+    .resource-nav__link:hover {
+      background: var(--neutral);
+      border-color: var(--accent);
+    }
+    .resource-nav__link--next { text-align: right; }
+    .resource-nav__label {
+      font-family: var(--english);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .resource-nav__title {
+      font-size: 0.92rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .resource-nav { grid-template-columns: 1fr; }
+      .resource-nav__link--next { text-align: left; }
+    }
+  </style>
+</Layout>

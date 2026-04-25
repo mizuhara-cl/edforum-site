@@ -1,53 +1,46 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import resources from '../../data/resources.json';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const sections = [
-  {
+interface ResourcePage {
+  slug: string;
+  title: string;
+  section: string;
+  sectionTitle: string;
+}
+
+const pages = resources as ResourcePage[];
+
+const sectionMeta: Record<string, { title: string; en: string; lead: string }> = {
+  diet: {
     title: '正常体重でのダイエットの危険性',
     en: 'Risks of Dieting at Normal Weight',
-    items: [
-      { slug: 'intro', title: 'はじめに' },
-      { slug: 'diet1', title: '日本特有の若年女性痩せすぎ問題' },
-      { slug: 'diet2', title: 'すぐにはやってこない、痩せすぎの悪影響' },
-      { slug: 'diet3', title: '若年からのカロリー制限の危険性' },
-      { slug: 'diet4', title: '甘すぎる痩せすぎの基準' },
-      { slug: 'diet5', title: '外圧頼りの現状' },
-      { slug: 'diet6', title: 'さいごに' },
-      { slug: 'diet7', title: '文献' },
-    ],
+    lead: '美容目的のダイエットがもたらす身体面・精神面の弊害について、最新の医学データから整理しています。',
   },
-  {
+  model: {
     title: '世界の痩せすぎモデル規制の経緯と日本',
     en: 'Underweight Model Regulations',
-    items: [
-      { slug: 'model1', title: '痩せすぎファッションモデルの問題の背景とBMI' },
-      { slug: 'model2', title: '痩せすぎファッションモデルの死亡' },
-      { slug: 'model3', title: '欧米各国の痩せすぎモデル規制' },
-      { slug: 'model4', title: '日本での現状' },
-      { slug: 'model5', title: '文献' },
-    ],
+    lead: '欧米諸国で進む痩せすぎモデルの規制と、日本における現状を概観します。',
   },
-  {
+  media: {
     title: 'メディアからの影響は本当なのか',
     en: 'Media Influence on Eating Disorders',
-    items: [
-      { slug: 'media1', title: 'メディアから影響で摂食障害が増えるのか' },
-      { slug: 'media2', title: '痩せ礼賛のメディアの影響についての研究' },
-      { slug: 'media3', title: '体型への不満と女性の心身の健康' },
-      { slug: 'media4', title: '新しいメディアの影響' },
-    ],
+    lead: 'メディアが摂食障害発症や体型観に与える影響について、研究知見をまとめています。',
   },
-  {
+  treatment: {
     title: '摂食障害治療',
     en: 'Treatment of Eating Disorders',
-    items: [
-      { slug: 'treatment', title: '摂食障害治療の基本的な考え方' },
-    ],
+    lead: '摂食障害の治療における基本的な考え方を概説します。',
   },
-];
+};
+
+const sections = ['diet', 'model', 'media', 'treatment'] as const;
 ---
-<Layout title="予防啓発コラム" description="摂食障害の予防に向けた啓発コラム集。痩せすぎモデル規制、ダイエットの危険性、メディアの影響など。">
+<Layout
+  title="予防啓発コラム"
+  description="摂食障害の予防に向けた啓発コラム集。痩せすぎモデル規制、ダイエットの危険性、メディアの影響など、医学的視点から整理。"
+>
   <section class="section section--hero">
     <div class="container">
       <div class="page-heading">
@@ -59,30 +52,91 @@ const sections = [
       </div>
 
       <div class="article">
-        <div class="notice">
-          <p class="notice__title">本コラムについて</p>
-          <p>
-            本コラム群は、旧サイト（eatingdisorderforum.net）に掲載されていた予防啓発コンテンツを再構成したものです。各記事の本文移植は順次進めてまいります。
-          </p>
-        </div>
-
-        {sections.map(section => (
-          <>
-            <h2>{section.title}</h2>
-            <p style="font-family:var(--english); font-style:italic; color:var(--accent); font-size:0.85rem; letter-spacing:0.1em; margin-top:-0.6em;">
-              {section.en}
-            </p>
-            <ul>
-              {section.items.map(item => (
-                <li>
-                  <span style="color:var(--text-muted);">{item.title}</span>
-                  <span style="font-size:0.78rem; color:var(--text-muted); margin-left:8px;">（移植準備中）</span>
-                </li>
-              ))}
-            </ul>
-          </>
-        ))}
+        {sections.map(s => {
+          const meta = sectionMeta[s];
+          const items = pages.filter(p => p.section === s);
+          if (items.length === 0) return null;
+          return (
+            <section class="resource-section">
+              <h2>{meta.title}</h2>
+              <p class="resource-section__en">{meta.en}</p>
+              <p style="color:var(--text-light); font-size:0.95rem; margin:0 0 16px;">{meta.lead}</p>
+              <ol class="resource-section__list">
+                {items.map((p, i) => (
+                  <li>
+                    <a href={`${base}/resources/${p.slug}/`}>
+                      <span class="resource-section__num">{String(i + 1).padStart(2, '0')}</span>
+                      <span class="resource-section__title">{p.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          );
+        })}
       </div>
     </div>
   </section>
+
+  <style is:global>
+    .resource-section {
+      margin: 36px 0 48px;
+      padding: 28px 0 8px;
+      border-top: 1px solid var(--border-light);
+    }
+    .resource-section h2 {
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+    .resource-section__en {
+      font-family: var(--english) !important;
+      font-style: italic;
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      margin: 4px 0 12px !important;
+    }
+    .resource-section__list {
+      list-style: none !important;
+      margin: 12px 0 !important;
+      padding: 0 !important;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .resource-section__list li {
+      margin: 0 !important;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .resource-section__list li:first-child {
+      border-top: 1px solid var(--border-light);
+    }
+    .resource-section__list a {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      padding: 14px 4px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background .2s, padding-left .2s;
+    }
+    .resource-section__list a:hover {
+      background: var(--neutral);
+      padding-left: 16px;
+      color: var(--primary);
+    }
+    .resource-section__num {
+      font-family: var(--english);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      min-width: 26px;
+    }
+    .resource-section__title {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+  </style>
 </Layout>
