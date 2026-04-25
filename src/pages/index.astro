@@ -35,7 +35,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="article">
         <h3>関連書籍のご案内</h3>
         <p>
-          <strong>「ダイエットをしたら太ります。最新医学データが示す不都合な真実」</strong>　永田 利彦 著<br />
+          <strong>
+            <a href={`${base}/monkeyproject.pdf`} target="_blank" rel="noopener">
+              「ダイエットをしたら太ります。最新医学データが示す不都合な真実」
+            </a>
+          </strong>　永田 利彦 著（PDF）<br />
           懇話会世話人の永田先生のご著書です。アカゲザルの実験ではカロリー制限をすると寿命が短縮する可能性が示されています。
         </p>
       </div>
