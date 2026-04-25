@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Layout>
+  <section class="hero">
+    <p class="hero__en">Eating Disorder Forum</p>
+    <h1 class="hero__title">摂食障害懇話会</h1>
+    <p class="hero__subtitle">治療と予防のための集まり</p>
+    <div class="hero__rule"></div>
+    <div class="hero__intro">
+      <p>
+        摂食障害懇話会は、摂食障害治療に真剣に取り組む専門家の集まりです。所属はそれぞれ異なりますが、立場を超えて、治療の困難さを議論し、治療者同士で支え合う場として、2007年から現在まで継続してきました。
+      </p>
+      <p>
+        いくら治しても追いつかない現状に、どうやって予防するかも大きな課題です。本サイトは、症例検討の知見を専門家コミュニティに共有するとともに、予防に向けた啓発を発信することを目的としています。
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-heading">
+        <p class="page-heading__en">News &amp; Updates</p>
+        <h2 class="page-heading__title">最新情報</h2>
+      </div>
+
+      <div class="notice">
+        <p class="notice__title">サイトリニューアル準備中</p>
+        <p>
+          現在、世話人会への提案に向けた仮ローンチ版を公開しています。本サイトは将来的にドメイン <code>eatingdisorderforum.net</code> へ移行予定です。
+        </p>
+      </div>
+
+      <div class="article">
+        <h3>関連書籍のご案内</h3>
+        <p>
+          <strong>「ダイエットをしたら太ります。最新医学データが示す不都合な真実」</strong>　永田 利彦 著<br />
+          懇話会世話人の永田先生のご著書です。アカゲザルの実験ではカロリー制限をすると寿命が短縮する可能性が示されています。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="page-heading">
+        <p class="page-heading__en">About Us</p>
+        <h2 class="page-heading__title">懇話会について</h2>
+      </div>
+
+      <div class="article">
+        <p>
+          関西圏の医師・心理士・看護師など、摂食障害治療に携わる多職種の専門家で構成される任意の研究会です。年に1〜2回、京都・大阪・兵庫の各大学病院をローテーションで会場とし、話題提供と症例検討会を行っています。
+        </p>
+        <p>
+          参加は守秘義務を有する専門家に限らせていただいております。詳細は <a href={`${base}/apply/`}>参加申込ページ</a> をご覧ください。
+        </p>
+      </div>
+
+      <p style="text-align:center; margin-top:36px;">
+        <a href={`${base}/about/`} class="btn">概要を読む</a>
+        <a href={`${base}/archive/`} class="btn" style="margin-left:12px;">これまでの歩み</a>
+      </p>
+    </div>
+  </section>
+</Layout>

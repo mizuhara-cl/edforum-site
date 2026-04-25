@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Layout
+  title="会員エリア"
+  description="摂食障害懇話会 会員専用エリア。各回の抄録・症例検討記録など、守秘義務を要する情報を共有します。"
+  noindex={true}
+>
+  <section class="section section--hero">
+    <div class="container">
+      <div class="page-heading">
+        <p class="page-heading__en">Members</p>
+        <h1 class="page-heading__title">会員エリア</h1>
+        <p class="page-heading__lead">
+          ようこそ、摂食障害懇話会の会員エリアへ。<br />
+          このエリアは守秘義務を有する専門家のみがアクセスできます。
+        </p>
+      </div>
+
+      <div class="article">
+        <div class="notice">
+          <p class="notice__title">本エリアの取り扱い</p>
+          <p>
+            本ページに掲載される情報は、患者様のプライバシー保護のため、外部への持ち出し・転載・SNSへの投稿を固く禁じます。<br />
+            会員IDとパスワードは厳重に管理し、第三者への共有はお控えください。
+          </p>
+        </div>
+
+        <h2>準備中のコンテンツ</h2>
+        <ul>
+          <li><strong>各回の抄録（200〜400字）</strong>　— 第1〜23回の話題提供・症例検討の要旨</li>
+          <li><strong>症例検討の匿名化サマリ</strong>　— 治療経過・考察・引用文献</li>
+          <li><strong>会員間連絡板</strong>　— 開催告知・依頼事項</li>
+          <li><strong>録画限定公開</strong>　— ハイブリッド開催時の録画（予定）</li>
+        </ul>
+
+        <h2>運営からのお知らせ</h2>
+        <p>
+          現在、各世話人と過去登壇者へ抄録掲載の可否を確認中です。準備が整い次第、順次掲載してまいります。
+        </p>
+
+        <p style="margin-top:36px;">
+          <a href={`${base}/`} class="btn">トップへ戻る</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

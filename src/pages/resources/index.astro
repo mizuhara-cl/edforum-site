@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const sections = [
+  {
+    title: '正常体重でのダイエットの危険性',
+    en: 'Risks of Dieting at Normal Weight',
+    items: [
+      { slug: 'intro', title: 'はじめに' },
+      { slug: 'diet1', title: '日本特有の若年女性痩せすぎ問題' },
+      { slug: 'diet2', title: 'すぐにはやってこない、痩せすぎの悪影響' },
+      { slug: 'diet3', title: '若年からのカロリー制限の危険性' },
+      { slug: 'diet4', title: '甘すぎる痩せすぎの基準' },
+      { slug: 'diet5', title: '外圧頼りの現状' },
+      { slug: 'diet6', title: 'さいごに' },
+      { slug: 'diet7', title: '文献' },
+    ],
+  },
+  {
+    title: '世界の痩せすぎモデル規制の経緯と日本',
+    en: 'Underweight Model Regulations',
+    items: [
+      { slug: 'model1', title: '痩せすぎファッションモデルの問題の背景とBMI' },
+      { slug: 'model2', title: '痩せすぎファッションモデルの死亡' },
+      { slug: 'model3', title: '欧米各国の痩せすぎモデル規制' },
+      { slug: 'model4', title: '日本での現状' },
+      { slug: 'model5', title: '文献' },
+    ],
+  },
+  {
+    title: 'メディアからの影響は本当なのか',
+    en: 'Media Influence on Eating Disorders',
+    items: [
+      { slug: 'media1', title: 'メディアから影響で摂食障害が増えるのか' },
+      { slug: 'media2', title: '痩せ礼賛のメディアの影響についての研究' },
+      { slug: 'media3', title: '体型への不満と女性の心身の健康' },
+      { slug: 'media4', title: '新しいメディアの影響' },
+    ],
+  },
+  {
+    title: '摂食障害治療',
+    en: 'Treatment of Eating Disorders',
+    items: [
+      { slug: 'treatment', title: '摂食障害治療の基本的な考え方' },
+    ],
+  },
+];
+---
+<Layout title="予防啓発コラム" description="摂食障害の予防に向けた啓発コラム集。痩せすぎモデル規制、ダイエットの危険性、メディアの影響など。">
+  <section class="section section--hero">
+    <div class="container">
+      <div class="page-heading">
+        <p class="page-heading__en">Resources</p>
+        <h1 class="page-heading__title">予防啓発コラム</h1>
+        <p class="page-heading__lead">
+          摂食障害は予防が極めて重要です。本コラム群は、ダイエット文化・メディアの影響・痩せすぎモデル問題を医学的視点から整理しています。
+        </p>
+      </div>
+
+      <div class="article">
+        <div class="notice">
+          <p class="notice__title">本コラムについて</p>
+          <p>
+            本コラム群は、旧サイト（eatingdisorderforum.net）に掲載されていた予防啓発コンテンツを再構成したものです。各記事の本文移植は順次進めてまいります。
+          </p>
+        </div>
+
+        {sections.map(section => (
+          <>
+            <h2>{section.title}</h2>
+            <p style="font-family:var(--english); font-style:italic; color:var(--accent); font-size:0.85rem; letter-spacing:0.1em; margin-top:-0.6em;">
+              {section.en}
+            </p>
+            <ul>
+              {section.items.map(item => (
+                <li>
+                  <span style="color:var(--text-muted);">{item.title}</span>
+                  <span style="font-size:0.78rem; color:var(--text-muted); margin-left:8px;">（移植準備中）</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

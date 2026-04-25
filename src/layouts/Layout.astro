@@ -1,0 +1,613 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = '関西の摂食障害治療者が集う症例検討会・勉強会。2007年から続く専門家のための研究会です。',
+  ogImage,
+  noindex = false,
+} = Astro.props;
+
+const siteName = '摂食障害懇話会';
+const fullTitle = title ? `${title}｜${siteName}` : `${siteName}｜Eating Disorder Forum`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const navItems = [
+  { href: `${base}/`, label: 'HOME' },
+  { href: `${base}/about/`, label: '懇話会の概要' },
+  { href: `${base}/officers/`, label: '世話人' },
+  { href: `${base}/archive/`, label: 'これまでの歩み' },
+  { href: `${base}/upcoming/`, label: '今後の予定' },
+  { href: `${base}/resources/`, label: '予防啓発' },
+  { href: `${base}/members/`, label: '会員エリア' },
+  { href: `${base}/apply/`, label: '参加申込' },
+];
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&display=swap"
+    />
+    <style is:global>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --primary: #1F3A5F;
+        --primary-dark: #14253E;
+        --primary-light: #E8EDF5;
+        --accent: #8B6F47;
+        --accent-light: #C4A57B;
+        --neutral: #F7F5F0;
+        --neutral-dark: #EAE6DC;
+        --text: #2A2A2A;
+        --text-light: #5A5A5A;
+        --text-muted: #8A8A8A;
+        --border: #D8D2C2;
+        --border-light: #E8E3D5;
+        --bg: #FFFFFF;
+        --serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'YuMincho', serif;
+        --sans: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+        --english: 'Crimson Pro', Georgia, serif;
+        --num: 'Inter', -apple-system, sans-serif;
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: var(--serif);
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.85;
+        font-size: 16px;
+        font-feature-settings: "palt";
+      }
+
+      img, svg { max-width: 100%; display: block; }
+      a { color: var(--primary); text-decoration: none; transition: color .2s; }
+      a:hover { color: var(--accent); }
+
+      h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.5; letter-spacing: 0.02em; }
+
+      /* === Header === */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .header-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 14px 28px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .header-brand {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .header-brand__en {
+        font-family: var(--english);
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .header-brand__jp {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: var(--primary);
+      }
+
+      .header-nav {
+        display: flex;
+        gap: 22px;
+        flex: 1;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .header-nav a {
+        font-family: var(--serif);
+        font-size: 0.86rem;
+        font-weight: 500;
+        color: var(--text);
+        white-space: nowrap;
+        position: relative;
+        padding: 4px 0;
+      }
+
+      .header-nav a:hover {
+        color: var(--primary);
+      }
+
+      .header-nav a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 1px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transition: transform .25s ease;
+      }
+
+      .header-nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      /* === Layout primitives === */
+      main { min-height: 60vh; }
+
+      .container {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+
+      .container--wide {
+        max-width: 1100px;
+      }
+
+      .section { padding: 80px 0; }
+      .section--hero { padding: 96px 0 64px; }
+      .section--alt { background: var(--neutral); }
+      .section--dark {
+        background: var(--primary);
+        color: rgba(255,255,255,0.92);
+      }
+      .section--dark a { color: var(--accent-light); }
+      .section--dark a:hover { color: white; }
+
+      /* === Page heading === */
+      .page-heading {
+        text-align: center;
+        margin-bottom: 56px;
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .page-heading__en {
+        font-family: var(--english);
+        font-size: 0.85rem;
+        letter-spacing: 0.3em;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        font-style: italic;
+      }
+
+      .page-heading__title {
+        font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+        font-weight: 600;
+        color: var(--primary);
+        letter-spacing: 0.08em;
+      }
+
+      .page-heading__lead {
+        margin-top: 18px;
+        font-size: 0.95rem;
+        color: var(--text-light);
+        max-width: 620px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 2;
+      }
+
+      /* === Hero (HOME) === */
+      .hero {
+        position: relative;
+        background:
+          linear-gradient(180deg, rgba(31,58,95,0.02) 0%, rgba(247,245,240,0.6) 100%),
+          var(--neutral);
+        padding: 100px 28px 72px;
+        text-align: center;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .hero__en {
+        font-family: var(--english);
+        font-style: italic;
+        font-size: 0.95rem;
+        letter-spacing: 0.18em;
+        color: var(--accent);
+        margin-bottom: 18px;
+      }
+
+      .hero__title {
+        font-size: clamp(1.8rem, 4.2vw, 2.7rem);
+        color: var(--primary);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        margin-bottom: 18px;
+      }
+
+      .hero__subtitle {
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        color: var(--text-light);
+        letter-spacing: 0.06em;
+        margin-bottom: 36px;
+      }
+
+      .hero__rule {
+        width: 60px;
+        height: 1px;
+        background: var(--accent);
+        margin: 0 auto 30px;
+      }
+
+      .hero__intro {
+        max-width: 640px;
+        margin: 0 auto;
+        font-size: 0.95rem;
+        line-height: 2.1;
+        color: var(--text);
+        text-align: left;
+      }
+
+      /* === Article (Markdown content) === */
+      .article {
+        font-size: 1rem;
+        line-height: 2.1;
+      }
+
+      .article p { margin: 1.4em 0; }
+
+      .article h2 {
+        font-size: 1.35rem;
+        color: var(--primary);
+        margin: 2.4em 0 1em;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+        letter-spacing: 0.06em;
+      }
+
+      .article h3 {
+        font-size: 1.1rem;
+        color: var(--primary);
+        margin: 2em 0 0.8em;
+        padding-left: 14px;
+        border-left: 3px solid var(--accent);
+        letter-spacing: 0.04em;
+      }
+
+      .article ul, .article ol { margin: 1em 0 1.4em 1.5em; }
+      .article li { margin: 0.4em 0; }
+
+      .article blockquote {
+        margin: 1.6em 0;
+        padding: 18px 28px;
+        border-left: 3px solid var(--accent);
+        background: var(--neutral);
+        font-style: italic;
+        color: var(--text-light);
+      }
+
+      /* === Buttons === */
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        font-family: var(--serif);
+        font-size: 0.92rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        border: 1px solid var(--primary);
+        color: var(--primary);
+        background: transparent;
+        text-decoration: none;
+        transition: all .2s;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn--filled {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn--filled:hover {
+        background: var(--primary-dark);
+        border-color: var(--primary-dark);
+        color: white;
+      }
+
+      .btn--accent {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .btn--accent:hover {
+        background: var(--accent);
+        color: white;
+      }
+
+      /* === Archive list (回 list) === */
+      .archive-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .archive-item {
+        border-bottom: 1px solid var(--border-light);
+        padding: 28px 0;
+      }
+
+      .archive-item:first-child { border-top: 1px solid var(--border-light); }
+
+      .archive-item__head {
+        display: flex;
+        gap: 18px;
+        align-items: baseline;
+        flex-wrap: wrap;
+        margin-bottom: 6px;
+      }
+
+      .archive-item__round {
+        font-family: var(--english);
+        font-size: 0.95rem;
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+      }
+
+      .archive-item__date {
+        font-family: var(--num);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+      }
+
+      .archive-item__venue {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-left: auto;
+      }
+
+      .archive-item__title {
+        display: block;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: var(--text);
+        margin: 6px 0 4px;
+        text-decoration: none;
+      }
+
+      .archive-item__title:hover { color: var(--primary); }
+
+      .archive-item__meta {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+
+      /* === Officer cards === */
+      .officer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 14px;
+        margin: 24px 0;
+      }
+
+      .officer-card {
+        padding: 18px 20px;
+        border: 1px solid var(--border-light);
+        background: var(--bg);
+        text-align: center;
+      }
+
+      .officer-card__name {
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: var(--primary);
+        letter-spacing: 0.08em;
+      }
+
+      .officer-card__role {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 4px;
+        letter-spacing: 0.1em;
+      }
+
+      /* === Definition table === */
+      .def {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+      }
+
+      .def th, .def td {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 0.92rem;
+        border-bottom: 1px solid var(--border-light);
+        vertical-align: top;
+      }
+
+      .def th {
+        width: 30%;
+        color: var(--text-light);
+        font-weight: 500;
+        background: var(--neutral);
+      }
+
+      /* === Notice / callout === */
+      .notice {
+        padding: 22px 26px;
+        background: var(--neutral);
+        border-left: 3px solid var(--accent);
+        margin: 26px 0;
+        font-size: 0.92rem;
+        line-height: 1.95;
+      }
+
+      .notice__title {
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 6px;
+        letter-spacing: 0.06em;
+      }
+
+      /* === Footer === */
+      .site-footer {
+        background: var(--primary-dark);
+        color: rgba(255,255,255,0.7);
+        padding: 60px 28px 28px;
+        margin-top: 80px;
+      }
+
+      .site-footer__inner {
+        max-width: 880px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .site-footer__brand-jp {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: white;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+      }
+
+      .site-footer__brand-en {
+        font-family: var(--english);
+        font-style: italic;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.55);
+        letter-spacing: 0.18em;
+        margin-top: 4px;
+      }
+
+      .site-footer__sep {
+        width: 50px;
+        height: 1px;
+        background: rgba(255,255,255,0.25);
+        margin: 22px auto;
+      }
+
+      .site-footer__nav {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 18px 0 22px;
+        font-size: 0.84rem;
+      }
+
+      .site-footer__nav a { color: rgba(255,255,255,0.75); }
+      .site-footer__nav a:hover { color: white; }
+
+      .site-footer__address {
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.6);
+        line-height: 1.9;
+      }
+
+      .site-footer__copy {
+        font-family: var(--english);
+        font-size: 0.72rem;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 0.1em;
+        margin-top: 22px;
+      }
+
+      /* === Responsive === */
+      @media (max-width: 880px) {
+        .header-inner { padding: 12px 18px; gap: 12px; }
+        .header-nav { gap: 14px; font-size: 0.8rem; }
+        .header-nav a { font-size: 0.8rem; }
+        .container { padding: 0 20px; }
+        .section { padding: 56px 0; }
+        .hero { padding: 64px 20px 48px; }
+        .archive-item__head { flex-direction: column; gap: 4px; align-items: flex-start; }
+        .archive-item__venue { margin-left: 0; }
+      }
+
+      @media (max-width: 640px) {
+        body { font-size: 15px; }
+        .header-brand__jp { font-size: 1rem; }
+        .header-brand__en { font-size: 0.62rem; }
+        .header-nav { gap: 10px 14px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href={`${base}/`} class="header-brand">
+          <span class="header-brand__en">Eating Disorder Forum</span>
+          <span class="header-brand__jp">摂食障害懇話会</span>
+        </a>
+        <nav class="header-nav" aria-label="グローバルナビゲーション">
+          {navItems.map(item => <a href={item.href}>{item.label}</a>)}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand-jp">摂食障害懇話会</div>
+        <div class="site-footer__brand-en">Eating Disorder Forum<br />association of treatment and prevention</div>
+        <div class="site-footer__sep"></div>
+        <nav class="site-footer__nav">
+          <a href={`${base}/`}>HOME</a>
+          <a href={`${base}/about/`}>概要</a>
+          <a href={`${base}/officers/`}>世話人</a>
+          <a href={`${base}/archive/`}>歩み</a>
+          <a href={`${base}/upcoming/`}>予定</a>
+          <a href={`${base}/apply/`}>参加申込</a>
+        </nav>
+        <p class="site-footer__address">
+          事務局：eatingdisorderforum&#64;gmail.com<br />
+          関西圏の摂食障害治療者による任意の研究会（2007年〜）
+        </p>
+        <p class="site-footer__copy">© 2007–2026 Eating Disorder Forum. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

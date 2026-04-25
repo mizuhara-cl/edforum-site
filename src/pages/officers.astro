@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sewanin = [
+  '小笠原 將之',
+  '田中 究',
+  '田中 聡',
+  '崔 炯仁',
+  '永田 利彦',
+  '野間 俊一',
+  '水田 一郎',
+  '水原 祐起',
+  '山下 達久',
+  '山田 恒',
+  '和田 良久',
+];
+
+const jimukyoku = ['水原 祐起', '山田 恒', '吉村 知穂'];
+---
+<Layout title="世話人・事務局" description="摂食障害懇話会の世話人および事務局のご紹介。">
+  <section class="section section--hero">
+    <div class="container">
+      <div class="page-heading">
+        <p class="page-heading__en">Officers</p>
+        <h1 class="page-heading__title">世話人・事務局</h1>
+        <p class="page-heading__lead">関西圏の摂食障害臨床の中核を担う先生方によって運営されています。</p>
+      </div>
+
+      <div class="article">
+        <h2>世話人（五十音順・敬称略）</h2>
+        <div class="officer-grid">
+          {sewanin.map(name => (
+            <div class="officer-card">
+              <div class="officer-card__name">{name}</div>
+              <div class="officer-card__role">世話人</div>
+            </div>
+          ))}
+        </div>
+
+        <h2>事務局</h2>
+        <div class="officer-grid">
+          {jimukyoku.map(name => (
+            <div class="officer-card">
+              <div class="officer-card__name">{name}</div>
+              <div class="officer-card__role">事務局</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="notice">
+          <p class="notice__title">略歴等の掲載について</p>
+          <p>
+            各世話人のご略歴・所属先の正式な記載は、世話人会での確認後に追加掲載予定です。本ページは仮ローンチ版のため、お名前のみの掲載となっております。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

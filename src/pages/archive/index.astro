@@ -1,0 +1,395 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+interface Round {
+  round: number;
+  date: string;
+  era: string;
+  venue: string;
+  topics: { title: string; presenter: string }[];
+  caseStudy?: {
+    title?: string;
+    chair?: string;
+    presenter: string;
+  };
+  extra?: { label: string; title: string; presenter: string }[];
+}
+
+const rounds: Round[] = [
+  {
+    round: 23,
+    era: '平成29年',
+    date: '2017年4月22日',
+    venue: '大阪大学会館',
+    topics: [
+      { title: '摂食障害と怒り', presenter: '大阪大学大学院精神医学教室　小笠原將之' },
+      { title: 'やせすぎモデル禁止法', presenter: 'なんば・ながたメンタルクリニック　永田利彦' },
+    ],
+    caseStudy: {
+      title: '強固な病気の否認および過活動への対応に苦慮した重症神経性やせ症の入院治療経過',
+      chair: '京都大学大学院医学研究科精神医学　野間俊一',
+      presenter: '宇治おうばく病院　武藤遥／京都大学病院　久米章也、佐々木有里、伊藤有里',
+    },
+  },
+  {
+    round: 22,
+    era: '平成28年',
+    date: '2016年11月12日',
+    venue: 'いわくら病院',
+    topics: [
+      { title: 'やせすぎモデル禁止法ワーキンググループ立ち上げについて', presenter: '兵庫医科大学精神科神経科　山田恒' },
+    ],
+    caseStudy: {
+      title: '社交不安を背景に神経性無食欲症を呈した女性の入院治療経過',
+      chair: '第二北山病院　守時通演',
+      presenter: 'いわくら病院　崔炯仁、北川尚美',
+    },
+  },
+  {
+    round: 21,
+    era: '平成28年',
+    date: '2016年5月7日',
+    venue: '京都大学医学部附属病院',
+    topics: [
+      { title: '名古屋大学医学部附属病院における青年期摂食障害診療', presenter: '名古屋大学医学部附属病院 親と子どもの心療科　鈴木太' },
+    ],
+    caseStudy: {
+      title: '頑なに人に頼ることを拒否したまま退院したAN女性の一例',
+      chair: '京都府立こども発達支援センター　山下達久',
+      presenter: '京都府立医科大学大学院精神機能病態学　橘亜紀、水原祐起',
+    },
+  },
+  {
+    round: 20,
+    era: '平成27年',
+    date: '2015年9月19日',
+    venue: '兵庫医科大学',
+    topics: [
+      { title: '鑑定事例における摂食障害患者の窃盗', presenter: '兵庫県立光風病院　福島春子' },
+    ],
+    caseStudy: {
+      title: '彼女はなぜ死んだのか〜入院加療するも死亡にいたった、重症拒食症の一例〜',
+      chair: '兵庫医科大学精神科神経科　山田恒',
+      presenter: '兵庫医科大学精神科神経科　吉村知穂',
+    },
+  },
+  {
+    round: 19,
+    era: '平成27年',
+    date: '2015年5月9日',
+    venue: '京都府立医科大学',
+    topics: [
+      { title: 'ロンドン留学記 〜モーズレイでの研究と臨床〜', presenter: '京都府立医科大学附属病院 精神科・心療内科　水原祐起' },
+    ],
+    caseStudy: {
+      title: '入院ごとに異なるアプローチを試みたが、変化を得られなかった難治性神経性やせ症の一例',
+      chair: '兵庫医科大学精神科神経科　山田恒',
+      presenter: '大阪市立大学医学部附属病院神経精神科　原田朋子',
+    },
+  },
+  {
+    round: 18,
+    era: '平成26年',
+    date: '2014年11月15日',
+    venue: '大阪大学中之島センター',
+    topics: [
+      { title: '摂食障害とひきこもり', presenter: '大阪大学保健センター　水田一郎' },
+    ],
+    caseStudy: {
+      title: '精神分析的アプローチを用いた中核的摂食障害患者に対する行動療法の一例',
+      chair: '京都大学大学院医学研究科精神医学　野間俊一',
+      presenter: '長岡病院　新谷卓司',
+    },
+  },
+  {
+    round: 17,
+    era: '平成26年',
+    date: '2014年4月5日',
+    venue: '京都大学医学部附属病院',
+    topics: [
+      { title: '摂食障害センター設立の進捗状況', presenter: '京都大学大学院医学研究科精神医学　野間俊一' },
+    ],
+    caseStudy: {
+      title: 'いわくら病院摂食障害治療チーム立ち上げ物語＆初入院・Aさんの治療経過',
+      presenter: 'いわくら病院　崔炯仁、上野光来、牧野友也、佐々木あゆみ、小禄智絵、川崎香菜子、堤こずえ、村山雄亮',
+    },
+    extra: [
+      { label: '活動報告', title: '摂食障害治療における精神科病院との協力体制づくり', presenter: '京都府立医科大学精神医学教室　和田良久' },
+    ],
+  },
+  {
+    round: 16,
+    era: '平成25年',
+    date: '2013年9月7日',
+    venue: '兵庫医科大学',
+    topics: [
+      { title: 'メンタルクリニックでどこまで診られるのか?', presenter: 'なんばながたメンタルクリニック　永田利彦' },
+    ],
+    caseStudy: {
+      title: '男性神経性食欲不振症の治療困難例',
+      chair: '京都府立こども発達支援センター　山下達久',
+      presenter: '京都府立医科大学附属病院 精神科・心療内科　西川仁美',
+    },
+  },
+  {
+    round: 15,
+    era: '平成25年',
+    date: '2013年4月27日',
+    venue: '京都府立医科大学',
+    topics: [
+      { title: '摂食障害と発達障害について', presenter: '京都府立こども発達支援センター　山下達久' },
+    ],
+    caseStudy: {
+      title: '兵庫医大での摂食障害治療の取り組み〜病棟スタッフの理解を得るためのひとつの方法〜',
+      chair: '兵庫医科大学精神科神経科　山田恒',
+      presenter: '兵庫医科大学精神科神経科　吉村知穂',
+    },
+  },
+  {
+    round: 14,
+    era: '平成24年',
+    date: '2012年11月17日',
+    venue: '大阪大学中之島センター',
+    topics: [
+      { title: '摂食障害と自己', presenter: '大阪大学大学院精神医学教室　小笠原將之' },
+    ],
+    caseStudy: {
+      title: '夫婦葛藤を背景として中年期に発症した神経性食欲不振症患者の治療過程',
+      chair: '京都大学大学病院精神科　野間俊一',
+      presenter: '京都大学大学　上野幸枝',
+    },
+  },
+  {
+    round: 13,
+    era: '平成24年',
+    date: '2012年5月12日',
+    venue: '京都大学医学部附属病院',
+    topics: [
+      { title: '摂食障害者の最早期記憶', presenter: '京都大学大学院教育学研究科　江城望' },
+    ],
+    caseStudy: {
+      title: '認知行動療法と対人関係療法を用いた重症摂食障害患者治療の一症例',
+      chair: '神戸女学院大学　水田一郎',
+      presenter: '大阪大学大学精神科　水田直樹',
+    },
+  },
+  {
+    round: 12,
+    era: '平成24年',
+    date: '2012年10月22日',
+    venue: '京都府立医科大学',
+    topics: [
+      { title: 'メンタライゼーション（Mentalization Based Therapy）のご紹介', presenter: '京都府精神保健福祉総合センター　崔炯仁' },
+    ],
+    caseStudy: {
+      chair: '大阪市立大学医学部附属病院 神経精神科　永田利彦',
+      presenter: '貝塚サナトリウム病院　山田恒',
+    },
+  },
+  {
+    round: 11,
+    era: '平成23年',
+    date: '2011年3月12日',
+    venue: '大阪大学中之島センター',
+    topics: [
+      { title: 'Eating Disorders Research Society 印象記', presenter: '大阪市立大学医学部附属病院　永田利彦' },
+    ],
+    caseStudy: {
+      chair: '京都府立医科大学附属病院 精神科・心療内科　山下達久',
+      presenter: '京都府立医科大学附属病院 精神科・心療内科　水原祐起',
+    },
+  },
+  {
+    round: 10,
+    era: '平成22年',
+    date: '2010年11月13日',
+    venue: '大阪市立大学',
+    topics: [
+      { title: '今後の懇話会への要望について', presenter: '大阪市立大学医学部附属病院　山田恒' },
+    ],
+    caseStudy: {
+      chair: '京都大学大学病院精神科　野間俊一',
+      presenter: '京都大学大学病院精神科　小野美樹',
+    },
+  },
+  {
+    round: 9,
+    era: '平成22年',
+    date: '2010年2月20日',
+    venue: '京都大学',
+    topics: [
+      { title: '街角の摂食障害診療', presenter: '高木神経科医院　浜垣誠司' },
+    ],
+    caseStudy: {
+      title: '摂食障害の周辺（続）―拒食を主訴に入院に至った小学男子2例の治療過程',
+      chair: '神戸女学院大学　水田一郎',
+      presenter: '大阪大学大学院精神医学教室　補永栄子',
+    },
+  },
+  {
+    round: 8,
+    era: '平成21年',
+    date: '2009年10月24日',
+    venue: '大阪市立大学',
+    topics: [
+      { title: '子どもの摂食障害の診断分類について', presenter: '大阪市立大学医学部附属病院　宮脇大' },
+    ],
+    caseStudy: {
+      chair: '大阪市立大学医学部附属病院　永田利彦',
+      presenter: '神戸海星病院　織戸宜子',
+    },
+  },
+  {
+    round: 7,
+    era: '平成21年',
+    date: '2009年4月25日',
+    venue: '京都府立医科大学',
+    topics: [
+      { title: 'ロンドン大学セントジョージ病院摂食障害部門について', presenter: '京都府立医科大学附属病院 精神科・心療内科　和田良久' },
+    ],
+    caseStudy: {
+      chair: '京都大学大学病院精神科　野間俊一',
+      presenter: '甲子園大学　藤本麻起子',
+    },
+  },
+  {
+    round: 6,
+    era: '平成20年',
+    date: '2008年11月22日',
+    venue: '大阪大学中之島センター',
+    topics: [
+      { title: '摂食障害への弁証法的行動療法', presenter: '大阪市立大学医学部附属病院　永田利彦' },
+    ],
+    caseStudy: {
+      chair: '京都府立医科大学附属病院 精神科・心療内科　山下達久',
+      presenter: '京都府立医科大学附属病院 精神科・心療内科　西澤晋',
+    },
+  },
+  {
+    round: 5,
+    era: '平成20年',
+    date: '2008年3月8日',
+    venue: '京都大学',
+    topics: [
+      { title: 'モーズレイ病院での経験', presenter: '徳島大学准教授　友竹正人' },
+    ],
+    caseStudy: {
+      chair: '神戸女学院大学　水田一郎',
+      presenter: '大阪市立大学医学部附属病院　吉村知穂',
+    },
+  },
+  {
+    round: 4,
+    era: '平成20年',
+    date: '2008年1月26日',
+    venue: '大阪市立大学',
+    topics: [
+      { title: '摂食障害治療における対人関係療法の可能性', presenter: '神戸女学院大学　水田一郎' },
+    ],
+    caseStudy: {
+      chair: '京都大学大学病院精神科　野間俊一',
+      presenter: '京都大学大学病院精神科　香月晶',
+    },
+  },
+  {
+    round: 3,
+    era: '平成19年',
+    date: '2007年9月22日',
+    venue: '大阪市立大学',
+    topics: [
+      { title: '京大病院における摂食障害治療の現状', presenter: '京都大学大学病院精神科　野間俊一' },
+    ],
+    caseStudy: {
+      chair: '神戸女学院大学　水田一郎',
+      presenter: '大阪大学大学院精神医学教室　補永栄子',
+    },
+  },
+  {
+    round: 2,
+    era: '平成19年',
+    date: '2007年6月9日',
+    venue: '京都府立医科大学',
+    topics: [
+      { title: '京都府立医大における摂食障害治療の変遷', presenter: '京都府立医科大学附属病院 精神科・心療内科　山下達久' },
+    ],
+    caseStudy: {
+      chair: '神戸女学院大学　水田一郎',
+      presenter: '大阪市立大学医学部附属病院　山田恒',
+    },
+  },
+  {
+    round: 1,
+    era: '平成19年',
+    date: '2007年1月27日',
+    venue: '京都府立医科大学',
+    topics: [
+      { title: '大阪市大での摂食障害治療', presenter: '大阪市立大学医学部附属病院　永田利彦' },
+    ],
+    caseStudy: {
+      chair: '京都府立医科大学附属病院 精神科・心療内科　山下達久',
+      presenter: '京都府立医科大学附属病院 精神科・心療内科　崔炯仁',
+    },
+  },
+];
+---
+<Layout
+  title="これまでの歩み"
+  description="摂食障害懇話会の第1回（2007年1月）から第23回（2017年4月）までの開催記録。話題提供と症例検討の内容を掲載。"
+>
+  <section class="section section--hero">
+    <div class="container">
+      <div class="page-heading">
+        <p class="page-heading__en">Archive</p>
+        <h1 class="page-heading__title">これまでの歩み</h1>
+        <p class="page-heading__lead">
+          第1回（2007年）から第23回（2017年）まで、関西の各大学病院・関連施設で開催してきた懇話会の記録です。<br />
+          敬称略・所属は当時のもの。
+        </p>
+      </div>
+
+      <ul class="archive-list">
+        {rounds.map(r => (
+          <li class="archive-item">
+            <div class="archive-item__head">
+              <span class="archive-item__round">第{r.round}回</span>
+              <span class="archive-item__date">{r.era}　{r.date}</span>
+              <span class="archive-item__venue">{r.venue}</span>
+            </div>
+            <div class="archive-item__meta">
+              {r.topics.map(t => (
+                <div>
+                  <strong style="color:var(--primary);">話題提供：</strong>
+                  「{t.title}」　<span style="color:var(--text-light);">{t.presenter}</span>
+                </div>
+              ))}
+              {r.caseStudy && (
+                <div style="margin-top:6px;">
+                  <strong style="color:var(--primary);">症例検討会：</strong>
+                  {r.caseStudy.title && <>「{r.caseStudy.title}」<br /></>}
+                  <span style="color:var(--text-light); margin-left:6em;">
+                    {r.caseStudy.chair && <>司会：{r.caseStudy.chair}<br /></>}
+                    <span style="margin-left:0;">症例呈示：{r.caseStudy.presenter}</span>
+                  </span>
+                </div>
+              )}
+              {r.extra?.map(e => (
+                <div style="margin-top:6px;">
+                  <strong style="color:var(--primary);">{e.label}：</strong>
+                  「{e.title}」　<span style="color:var(--text-light);">{e.presenter}</span>
+                </div>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="notice" style="margin-top:48px;">
+        <p class="notice__title">抄録の追加について</p>
+        <p>
+          現在は開催タイトルのみの掲載ですが、今後は各回の抄録（200〜400字）を順次追加していく予定です。会員エリアでは症例の匿名化サマリも公開を検討しています。
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

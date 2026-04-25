@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Layout title="今後の予定" description="摂食障害懇話会の次回開催予定。">
+  <section class="section section--hero">
+    <div class="container">
+      <div class="page-heading">
+        <p class="page-heading__en">Upcoming</p>
+        <h1 class="page-heading__title">今後の予定</h1>
+      </div>
+
+      <div class="article">
+        <div class="notice">
+          <p class="notice__title">次回開催のご案内</p>
+          <p>
+            次回開催の詳細は、決定次第こちらのページに掲載いたします。<br />
+            ご参加希望の方は <a href={`${base}/apply/`}>参加申込ページ</a> よりお問い合わせください。
+          </p>
+        </div>
+
+        <h2>過去の予告（参考）</h2>
+        <table class="def">
+          <tbody>
+            <tr>
+              <th>第25回</th>
+              <td>平成30年（2018年）4月21日（土）　兵庫医科大学　＜開催情報・参考＞</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>開催ペース</h2>
+        <p>
+          年に1〜2回、京都・大阪・兵庫の各大学病院・関連施設をローテーションで会場として開催しています。
+        </p>
+
+        <h2>これまでの開催</h2>
+        <p>
+          第1回（2007年1月）から第23回（2017年4月）までの記録は <a href={`${base}/archive/`}>これまでの歩み</a> をご覧ください。
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

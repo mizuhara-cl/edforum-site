@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Layout title="お問い合わせ" description="摂食障害懇話会へのお問い合わせ窓口。">
+  <section class="section section--hero">
+    <div class="container">
+      <div class="page-heading">
+        <p class="page-heading__en">Contact</p>
+        <h1 class="page-heading__title">お問い合わせ</h1>
+      </div>
+
+      <div class="article">
+        <h2>事務局連絡先</h2>
+        <p>
+          本会への参加申込・取材・寄稿のお問い合わせは、下記事務局までメールでお願いいたします。
+        </p>
+
+        <div class="notice">
+          <p style="font-size:1.1rem; letter-spacing:0.05em; margin:0;">
+            <strong>eatingdisorderforum&#64;gmail.com</strong>
+          </p>
+        </div>
+
+        <h2>参加申込</h2>
+        <p>
+          専門家の方の参加申込については、<a href={`${base}/apply/`}>参加申込ページ</a> をご覧ください。
+        </p>
+
+        <h2>個別の医療相談について</h2>
+        <p>
+          残念ながら、患者様・ご家族様からの個別の医療相談には、ご返答できる状況にはございません。何卒ご理解のほど、お願い申し上げます。
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
