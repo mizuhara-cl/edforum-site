@@ -56,6 +56,8 @@ for (const f of files) {
     '--template-placeholder', '"パスワード"',
     '--template-remember', '"このブラウザに保存する"',
     '--template-error', '"パスワードが違います"',
+    '--template-color-primary', '"#1F3A5F"',
+    '--template-color-secondary', '"#F7F5F0"',
     '--remember', '7',
   ].join(' ');
   try {
