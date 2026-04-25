@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<Layout title="今後の予定" description="摂食障害懇話会の次回開催予定。">
+<Layout title="今後の予定" description="摂食障害懇話会の次回開催予定。第34回・第35回の概要を掲載しています。">
   <section class="section section--hero">
     <div class="container">
       <div class="page-heading">
@@ -11,20 +11,51 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
 
       <div class="article">
-        <div class="notice">
-          <p class="notice__title">次回開催のご案内</p>
-          <p>
-            次回開催の詳細は、決定次第こちらのページに掲載いたします。<br />
-            ご参加希望の方は <a href={`${base}/apply/`}>参加申込ページ</a> よりお問い合わせください。
-          </p>
+        <h2>次回・次々回の開催予定</h2>
+
+        <div class="notice" style="border-left-color:var(--accent);">
+          <p class="notice__title">第34回　摂食障害懇話会</p>
+          <table class="def" style="margin:8px 0 0;">
+            <tbody>
+              <tr><th>開催時期</th><td>2026年（令和8年）秋冬　予定</td></tr>
+              <tr><th>会場</th><td>京都府立医科大学（予定）</td></tr>
+              <tr><th>話題提供</th><td>京都府立医科大学（演者・テーマ未定）</td></tr>
+              <tr><th>症例呈示</th><td>兵庫医科大学（未定）</td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <h2>過去の予告（参考）</h2>
+        <div class="notice" style="border-left-color:var(--accent);">
+          <p class="notice__title">第35回　摂食障害懇話会</p>
+          <table class="def" style="margin:8px 0 0;">
+            <tbody>
+              <tr><th>開催時期</th><td>2027年（令和9年）春　予定</td></tr>
+              <tr><th>会場</th><td>大阪公立大学（予定）</td></tr>
+              <tr><th>話題提供</th><td>大阪公立大学（演者・テーマ未定）</td></tr>
+              <tr><th>症例呈示</th><td>大阪大学（未定）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          詳細が決定次第、本ページに情報を掲載いたします。<br />
+          ご参加希望の方は <a href={`${base}/apply/`}>参加申込ページ</a> よりお問い合わせください。
+        </p>
+
+        <h2>直近の開催実績</h2>
         <table class="def">
           <tbody>
             <tr>
-              <th>第25回</th>
-              <td>平成30年（2018年）4月21日（土）　兵庫医科大学　＜開催情報・参考＞</td>
+              <th>第33回</th>
+              <td>2026年4月11日　大阪大学中之島センター 7階 セミナー室</td>
+            </tr>
+            <tr>
+              <th>第32回</th>
+              <td>2025年10月25日　京都大学医学部 臨床第1講堂</td>
+            </tr>
+            <tr>
+              <th>第31回</th>
+              <td>2025年5月10日　アンピールホテル大阪 大ホール（兵庫医科大学開催）</td>
             </tr>
           </tbody>
         </table>
@@ -34,9 +65,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           年に1〜2回、京都・大阪・兵庫の各大学病院・関連施設をローテーションで会場として開催しています。
         </p>
 
-        <h2>これまでの開催</h2>
         <p>
-          第1回（2007年1月）から第23回（2017年4月）までの記録は <a href={`${base}/archive/`}>これまでの歩み</a> をご覧ください。
+          すべての開催記録は <a href={`${base}/archive/`}>これまでの歩み</a> をご覧ください。
         </p>
       </div>
     </div>
