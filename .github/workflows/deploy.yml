@@ -33,16 +33,6 @@ jobs:
       - name: Build Astro site
         run: npm run build
 
-      - name: Encrypt /members/ with staticrypt
-        env:
-          STATICRYPT_PASSWORD: ${{ secrets.MEMBERS_PASSWORD }}
-        run: |
-          if [ -z "$STATICRYPT_PASSWORD" ]; then
-            echo "::warning::MEMBERS_PASSWORD secret not set; /members/ will be unprotected."
-          else
-            node scripts/encrypt-members.mjs
-          fi
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
