@@ -9,14 +9,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:protected": "astro build && node scripts/encrypt-members.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^4.16.18"
-  },
-  "devDependencies": {
-    "staticrypt": "^3.4.0"
   }
 }
