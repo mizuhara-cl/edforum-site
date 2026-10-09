@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:cf": "node scripts/build-cf.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

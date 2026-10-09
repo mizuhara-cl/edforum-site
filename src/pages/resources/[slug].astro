@@ -21,6 +21,8 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params as { slug: string };
 const page = pages.find(p => p.slug === slug)!;
+// resources.json は GitHub Pages 用の /edforum-site/ を直書きしているので、配備先の base に合わせて書き換える
+const html = page.html.replaceAll('/edforum-site/', `${base}/`);
 const sameSection = pages.filter(p => p.section === page.section);
 const idx = sameSection.findIndex(p => p.slug === page.slug);
 const prev = idx > 0 ? sameSection[idx - 1] : null;
@@ -41,7 +43,7 @@ const next = idx < sameSection.length - 1 ? sameSection[idx + 1] : null;
         <h1 class="page-heading__title">{page.title}</h1>
       </div>
 
-      <article class="article resource-body" set:html={page.html}></article>
+      <article class="article resource-body" set:html={html}></article>
 
       <nav class="resource-nav">
         {prev ? (
