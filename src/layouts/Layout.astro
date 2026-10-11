@@ -44,7 +44,7 @@ const navItems = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Shippori+Mincho+B1:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
     />
     <style is:global>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,8 +63,7 @@ const navItems = [
         --border: #D8D2C2;
         --border-light: #E8E3D5;
         --bg: #FFFFFF;
-        --serif: 'Shippori Mincho B1', 'Hiragino Mincho ProN', 'YuMincho', serif;
-        --sans: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+        --jp: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
         --english: 'Crimson Pro', Georgia, serif;
         --num: 'Inter', -apple-system, sans-serif;
       }
@@ -72,8 +71,8 @@ const navItems = [
       html { scroll-behavior: smooth; }
 
       body {
-        font-family: var(--serif);
-        font-weight: 500;
+        font-family: var(--jp);
+        font-weight: 400;
         color: var(--text);
         background: var(--bg);
         line-height: 1.85;
@@ -85,7 +84,7 @@ const navItems = [
       a { color: var(--primary); text-decoration: none; transition: color .2s; }
       a:hover { color: var(--accent); }
 
-      h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; line-height: 1.5; letter-spacing: 0.02em; }
+      h1, h2, h3, h4 { font-family: var(--jp); font-weight: 700; line-height: 1.5; letter-spacing: 0.02em; }
 
       /* === Header === */
       .site-header {
@@ -125,7 +124,7 @@ const navItems = [
       }
 
       .header-brand__jp {
-        font-family: var(--serif);
+        font-family: var(--jp);
         font-size: 1.15rem;
         font-weight: 700;
         letter-spacing: 0.06em;
@@ -141,9 +140,9 @@ const navItems = [
       }
 
       .header-nav a {
-        font-family: var(--serif);
+        font-family: var(--jp);
         font-size: 0.86rem;
-        font-weight: 600;
+        font-weight: 500;
         color: var(--text);
         white-space: nowrap;
         position: relative;
@@ -321,7 +320,7 @@ const navItems = [
       .btn {
         display: inline-block;
         padding: 12px 30px;
-        font-family: var(--serif);
+        font-family: var(--jp);
         font-size: 0.92rem;
         font-weight: 600;
         letter-spacing: 0.08em;
@@ -502,7 +501,7 @@ const navItems = [
       }
 
       .site-footer__brand-jp {
-        font-family: var(--serif);
+        font-family: var(--jp);
         font-size: 1.1rem;
         color: white;
         font-weight: 600;
