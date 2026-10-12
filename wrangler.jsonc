@@ -1,0 +1,9 @@
+{
+  // 懇話会の Cloudflare（eatingdisorderforum@gmail.com）で Workers の静的アセットとして配信する。
+  // Workers Builds の設定＝build: npm run build:cf ／ deploy: npx wrangler deploy（2026-10-12）
+  "name": "eatingdisorderforum",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist-cf"
+  }
+}
