@@ -16,6 +16,8 @@ concurrency:
 
 jobs:
   build:
+    # GitHub Pages の仮サイトは mizuhara-cl 側だけ。懇話会のリポ（eatingdisorderforum/edforum-site）は Cloudflare Pages が配備する
+    if: github.repository == 'mizuhara-cl/edforum-site'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
